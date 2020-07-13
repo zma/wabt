@@ -43,7 +43,11 @@ std::string u64toname(const uint64_t u) {
 }
 
 std::string nameannotation(const uint64_t u) {
-  if (u < 1000) {
+  int64_t si = static_cast<int64_t>(u);
+  if (si < 0) {
+    si = -si;
+  }
+  if (si < 1000) {
     return std::string{};
   }
 

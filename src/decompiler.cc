@@ -107,7 +107,9 @@ struct Decompiler {
       auto is = (&stat != &val.v[0] || first_indent.empty())
                     ? string_view(indent)
                     : first_indent;
-      stat.insert(0, is.data(), is.size());
+      if (stat.rfind("label ", 0) != 0) { // no indent for labels
+        stat.insert(0, is.data(), is.size());
+      }
     }
   }
 
