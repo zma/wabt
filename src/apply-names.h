@@ -40,6 +40,11 @@ struct Module;
  */
 Result ApplyNames(struct Module*);
 
+// EOSIO names
+std::string u64toname(const uint64_t u);
+
+std::string nameannotation(const uint64_t u);
+
 }  // namespace wabt
 
 #endif /* WABT_APPLY_NAMES_H_ */

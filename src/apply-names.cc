@@ -26,6 +26,30 @@
 
 namespace wabt {
 
+std::string u64toname(const uint64_t u) {
+  int i, d;
+  char n[14];
+  char *p = n;
+
+  for (i = 0; i <= 12; i++) {
+    d = i == 12 ? u & 0xf : u >> (59 - i * 5) & 0x1f;
+    *p++ = d == 0 ? '.' : (1 <= d && d <= 5) ? d - 1 + '1' : d - 6 + 'a';
+  }
+  while (p != n && *(p - 1) == '.')
+    --p;
+  *p = '\0';
+
+  return std::string(n);
+}
+
+std::string nameannotation(const uint64_t u) {
+  if (u < 1000) {
+    return std::string{};
+  }
+
+  return std::string{" /* \""} + u64toname(u) + "\"_n */";
+}
+
 namespace {
 
 class NameApplier : public ExprVisitor::DelegateNop {

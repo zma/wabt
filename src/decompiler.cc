@@ -16,6 +16,7 @@
 
 #include "src/decompiler.h"
 
+#include "src/apply-names.h"
 #include "src/decompiler-ast.h"
 #include "src/decompiler-ls.h"
 #include "src/decompiler-naming.h"
@@ -403,7 +404,7 @@ struct Decompiler {
             return Value{{std::to_string(static_cast<int32_t>(c.u32()))},
                          Precedence::Atomic};
           case Type::I64:
-            return Value{{std::to_string(static_cast<int64_t>(c.u64())) + "L"},
+            return Value{{std::to_string(static_cast<int64_t>(c.u64())) + "L" + nameannotation(c.u64())},
                          Precedence::Atomic};
           case Type::F32: {
             float f = Bitcast<float>(c.f32_bits());

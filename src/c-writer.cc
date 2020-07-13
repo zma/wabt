@@ -27,6 +27,7 @@
 #include "src/literal.h"
 #include "src/stream.h"
 #include "src/string-view.h"
+#include "src/apply-names.h"
 
 #define INDENT_SIZE 2
 
@@ -707,7 +708,7 @@ void CWriter::Write(const Const& const_) {
       break;
 
     case Type::I64:
-      Writef("%" PRIu64 "ull", static_cast<int64_t>(const_.u64()));
+      Writef("%" PRIu64 "ull" "%s", static_cast<int64_t>(const_.u64()), nameannotation(const_.u64()).c_str());
       break;
 
     case Type::F32: {
